@@ -11,8 +11,8 @@ env:
         - ZEPHYR_GCC_VARIANT=zephyr
         - USE_CCACHE=1
     matrix:
-        - ARCH="-a x86 -a riscv32" RUN_COMPLIANCE="1"
-        - ARCH="-a arm -a arc -a nios2"
+        - ARCH="-a x86 -a arc -a nios2 -a riscv32" RUN_COMPLIANCE="1"
+        - ARCH="-a arm"
 
 build:
     cache: true
