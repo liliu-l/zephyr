@@ -61,6 +61,9 @@
 /* The ENDADDR field has the last 5 bit reserved and set to 1 */
 #define ENDADDR_ROUND(x) (x - 0x1F)
 
+/* The ENDADDR field has the last 5 bit reserved and set to 1 */
+#define ENDADDR_ROUND(x) (x - 0x1F)
+
 /* Some helper defines for common regions */
 #define REGION_RAM_ATTR	  (MPU_REGION_READ | \
 			   MPU_REGION_WRITE | \
