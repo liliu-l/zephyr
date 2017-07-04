@@ -13,6 +13,7 @@
 #include "pdu.h"
 #include "ctrl.h"
 #include "ll.h"
+#include "ll_filter.h"
 
 u32_t ll_create_connection(u16_t scan_interval, u16_t scan_window,
 			   u8_t filter_policy, u8_t peer_addr_type,
@@ -33,6 +34,14 @@ u32_t ll_create_connection(u16_t scan_interval, u16_t scan_window,
 		return status;
 	}
 
+#if defined(CONFIG_BLUETOOTH_CONTROLLER_PRIVACY)
+	ll_filters_scan_update(filter_policy);
+	if (own_addr_type == BT_ADDR_LE_PUBLIC_ID ||
+	    own_addr_type == BT_ADDR_LE_RANDOM_ID) {
+		/* Generate RPAs if required */
+		ll_rl_rpa_update(false);
+	}
+#endif
 	return radio_scan_enable(0, own_addr_type,
 				 ll_addr_get(own_addr_type, NULL),
 				 scan_interval, scan_window, filter_policy);
